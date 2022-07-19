@@ -18,9 +18,13 @@ class UserInput extends StatelessWidget {
               decoration: const InputDecoration(hintText: 'Add New Note'),
             ),
           )),
-          const SizedBox(width: 10),
           GestureDetector(
             onTap: () {},
+            child: Container(
+              color: Colors.red,
+              padding: const EdgeInsets.all(5),
+              child: const Text('Add'),
+            ),
           )
         ],
       ),
