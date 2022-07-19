@@ -14,16 +14,27 @@ class _TodoCardState extends State<TodoCard> {
       child: Row(
         children: [
           Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: Checkbox(value: false, onChanged: (bool? value) {}),
           ),
           Expanded(
-              child: Column(children: [
-            Text('Title'),
-            const SizedBox(
-              width: 5,
-            ),
-            Text('Date')
-          ])),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                Text('Title',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text('Date',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ))
+              ])),
           IconButton(onPressed: () {}, icon: const Icon(Icons.close))
         ],
       ),

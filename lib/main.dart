@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'To Do Application'),
     );
   }
 }
@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         // ignore: prefer_const_literals_to_create_immutables
-        children: [TodoCard(), UserInput()],
+        children: [TodoCard(), const SizedBox(height: 5), UserInput()],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
