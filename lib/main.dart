@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Widgets/task_input.dart';
+import 'package:to_do_app/Widgets/todo_card.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         // ignore: prefer_const_literals_to_create_immutables
-        children: [UserInput()],
+        children: [TodoCard(), UserInput()],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );

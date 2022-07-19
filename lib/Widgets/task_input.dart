@@ -22,8 +22,14 @@ class UserInput extends StatelessWidget {
             onTap: () {},
             child: Container(
               color: Colors.red,
-              padding: const EdgeInsets.all(5),
-              child: const Text('Add'),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              child: const Text(
+                'Add',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           )
         ],
