@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Widgets/task_input.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,15 +35,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Hello World',
-            ),
-          ],
-        ),
+      body: Column(
+        // ignore: prefer_const_literals_to_create_immutables
+        children: [UserInput()],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
