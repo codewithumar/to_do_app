@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
 
 class TodoCard extends StatefulWidget {
-  const TodoCard({Key? key}) : super(key: key);
+  final int id;
+  final String title;
+  bool isChecked;
+  final DateTime cerationDate;
+  final Function insertionFunction;
+  final Fucntion deleteFunction;
+
+  const TodoCard(
+      {required this.id,
+      required this.title,
+      required this.cerationDate,
+      required this.isChecked,
+      required this.insertionFunction,
+      required this.deleteFunction,
+      Key? key})
+      : super(key: key);
 
   @override
   State<TodoCard> createState() => _TodoCardState();
@@ -15,7 +30,11 @@ class _TodoCardState extends State<TodoCard> {
         children: [
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-            child: Checkbox(value: false, onChanged: (bool? value) {}),
+            child: Checkbox(
+                value: widget.isChecked,
+                onChanged: (bool? value) {
+                  widget.isChecked = value!;
+                }),
           ),
           Expanded(
               child: Column(
