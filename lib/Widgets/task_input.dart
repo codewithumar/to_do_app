@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Models/todo_model.dart';
 
 class UserInput extends StatelessWidget {
   var textController = TextEditingController();
-  UserInput({Key? key}) : super(key: key);
+  final Function insertionFunction;
+  UserInput({required this.insertionFunction, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,13 @@ class UserInput extends StatelessWidget {
             ),
           )),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              var mytodo = Todo(
+                  title: textController.text,
+                  isChecked: false,
+                  creationDate: DateTime.now());
+              insertionFunction(mytodo);
+            },
             child: Container(
               color: Colors.red,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
