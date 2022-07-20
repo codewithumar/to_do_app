@@ -37,10 +37,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Column(
-        // ignore: prefer_const_literals_to_create_immutables
         children: [TodoCard(), const SizedBox(height: 5), UserInput()],
       ),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
