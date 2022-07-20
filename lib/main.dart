@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_app/Widgets/task_input.dart';
-import 'package:to_do_app/Widgets/todo_card.dart';
+import 'package:to_do_app/Models/db_model.dart';
+import 'package:to_do_app/Models/todo_model.dart';
+import 'package:to_do_app/Screens/Home_page.dart';
 
-void main() {
+void main() async {
+  //WidgetsFlutterBinding.ensureInitialized();
+  var db = DatabaseConnect();
+  await db.insertTodo(Todo(
+      id: 1, title: 'Sample', creationDate: DateTime.now(), isChecked: false));
   runApp(const MyApp());
 }
 
@@ -10,35 +15,8 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'To Do Application'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        children: [TodoCard(), const SizedBox(height: 5), UserInput()],
-      ),
+    return const MaterialApp(
+      home: HomePage(),
     );
   }
 }
