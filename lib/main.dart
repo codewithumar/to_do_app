@@ -4,10 +4,7 @@ import 'package:to_do_app/Models/todo_model.dart';
 import 'package:to_do_app/Screens/Home_page.dart';
 
 void main() async {
-  //WidgetsFlutterBinding.ensureInitialized();
-  var db = DatabaseConnect();
-  await db.insertTodo(Todo(
-      id: 1, title: 'Sample', creationDate: DateTime.now(), isChecked: false));
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -16,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
   }
