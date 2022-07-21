@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_app/Models/db_model.dart';
-import 'package:to_do_app/Models/todo_model.dart';
-import 'package:to_do_app/Screens/Home_page.dart';
+import 'package:to_do_app/Screens/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

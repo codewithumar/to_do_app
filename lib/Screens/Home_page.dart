@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Models/db_model.dart';
-import 'package:to_do_app/Widgets/todo_card.dart';
 import 'package:to_do_app/Widgets/task_input.dart';
 import 'package:to_do_app/Widgets/todo_list.dart';
 
@@ -14,7 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
   var db = DatabaseConnect();
   void addItem(Todo todo) async {
     await db.insertTodo(todo);
@@ -26,21 +24,22 @@ class _HomePageState extends State<HomePage> {
     setState(() {});
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todo App'),
+        title: const Text('Todo App'),
       ),
       body: Column(
         children: [
+          UserInput(
+            insertionFunction: addItem,
+          ),
           TodoList(
             insertionFuntion: addItem,
             deleteFunction: deleteItem,
           ),
           const SizedBox(height: 5),
-          UserInput(
-            insertionFunction: addItem,
-          )
         ],
       ),
     );

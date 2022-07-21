@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Models/todo_model.dart';
 
+// ignore: must_be_immutable
 class TodoCard extends StatefulWidget {
   final int id;
   final String title;
@@ -42,6 +43,7 @@ class _TodoCardState extends State<TodoCard> {
                     setState(() {
                       widget.isChecked = value!;
                     });
+
                     anotherTodo.isChecked = value!;
                     widget.insertionFunction(anotherTodo);
                   })),
@@ -50,7 +52,7 @@ class _TodoCardState extends State<TodoCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                 Text(widget.title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     )),
@@ -58,7 +60,7 @@ class _TodoCardState extends State<TodoCard> {
                   width: 5,
                 ),
                 Text(widget.cerationDate.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ))

@@ -8,10 +8,10 @@ class DatabaseConnect {
   Database? _database;
 
   Future<Database> get database async {
-    final _dbpath = await getDatabasesPath();
-    const _db_name = 'todo.db';
-    final _path = join(_dbpath, _db_name);
-    _database = await openDatabase(_path, version: 1, onCreate: _createDB);
+    final dbpath = await getDatabasesPath();
+    const dbName = 'todo.db';
+    final path = join(dbpath, dbName);
+    _database = await openDatabase(path, version: 1, onCreate: _createDB);
     return _database!;
   }
 
