@@ -6,6 +6,8 @@ import 'package:to_do_app/Widgets/todo_list.dart';
 import '../Models/todo_model.dart';
 
 class HomePage extends StatefulWidget {
+  final title = "";
+  final description = "";
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -32,15 +34,28 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          UserInput(
-            insertionFunction: addItem,
-          ),
+          const SizedBox(height: 5),
           TodoList(
             insertionFuntion: addItem,
             deleteFunction: deleteItem,
           ),
-          const SizedBox(height: 5),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return SimpleDialog(children: [
+                  UserInput(
+                    insertionFunction: addItem,
+                  )
+                ]);
+              });
+        },
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.add),
       ),
     );
   }

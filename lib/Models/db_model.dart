@@ -20,6 +20,7 @@ class DatabaseConnect {
     CREATE TABLE todo(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT,
+      description TEXT,
       creationDate TEXT,
       isChecked INTEGER
     )
@@ -48,6 +49,7 @@ class DatabaseConnect {
       (i) => Todo(
         id: items[i]['id'],
         title: items[i]['title'],
+        description: items[i]['description'],
         creationDate: DateTime.parse(items[i]['creationDate']),
         isChecked: items[i]['isChecked'] == 1 ? true : false,
       ),

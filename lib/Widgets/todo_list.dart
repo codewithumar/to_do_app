@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/cupertino.dart';
 import 'package:to_do_app/Models/db_model.dart';
 import 'package:to_do_app/Widgets/todo_card.dart';
@@ -22,13 +24,14 @@ class TodoList extends StatelessWidget {
 
           return datalength == 0
               ? const Center(
-                  child: Text('No Record'),
+                  child: Text('Nothing To Show Up'),
                 )
               : ListView.builder(
                   itemCount: datalength,
                   itemBuilder: (context, i) => TodoCard(
                       id: data[i].id,
                       title: data[i].title,
+                      description: data[i].description,
                       cerationDate: data[i].creationDate,
                       isChecked: data[i].isChecked,
                       insertionFunction: insertionFuntion,
