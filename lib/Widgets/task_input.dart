@@ -3,14 +3,25 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Models/todo_model.dart';
 
-class UserInput extends StatelessWidget {
-  final title = "";
-  final description = "";
-  final textController = TextEditingController();
-  final textController2 = TextEditingController();
-  DateTime? date;
+class UserInput extends StatefulWidget {
   final Function insertionFunction;
   UserInput({required this.insertionFunction, Key? key}) : super(key: key);
+
+  @override
+  State<UserInput> createState() => _UserInputState();
+}
+
+class _UserInputState extends State<UserInput> {
+  final title = "";
+
+  final description = "";
+
+  final textController = TextEditingController();
+
+  final textController2 = TextEditingController();
+
+  DateTime selecteddate = DateTime.now();
+  TimeOfDay selectedTime = TimeOfDay.now();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +32,18 @@ class UserInput extends StatelessWidget {
           buildtitle(),
           builddescription(),
           buildButton(),
-          buildDate()
+          TextButton(
+              onPressed: () {
+                selecteddate = getdatefromuser(context);
+              },
+              child: const Text('Choose date')),
+          TextButton(
+              onPressed: () {
+                getTiemfromuser(context);
+              },
+              child: const Text("Choose Time"))
+          // buildDate()
+
           /*Expanded(
               child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 2),
@@ -72,21 +94,57 @@ class UserInput extends StatelessWidget {
         decoration: const InputDecoration(
             border: UnderlineInputBorder(), labelText: 'Desctiption'),
       );
-  Widget buildDate() => DatePickerDialog(
+
+  Widget buildDate(BuildContext context) => DatePickerDialog(
+        // context:context,
         initialDate: DateTime.now(),
         firstDate: DateTime(1947, 01, 01),
         lastDate: DateTime(2100, 12, 12),
       );
+
+  getdatefromuser(BuildContext context) {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime.now(),
+            lastDate: DateTime(3000))
+        .then((pickeddate) {
+      if (pickeddate == null) {
+        return null;
+      }
+      setState(() {
+        selecteddate = pickeddate;
+      });
+    });
+    Builder:
+    (context);
+  }
+
+  getTiemfromuser(BuildContext context) {
+    showTimePicker(
+            context: context,
+            initialTime:
+                TimeOfDay(hour: selecteddate.hour, minute: selecteddate.minute))
+        .then((pickTime) {
+      if (pickTime == null) {
+        return null;
+      }
+      setState(() {
+        selectedTime = pickTime;
+      });
+    });
+    Builder:
+    (context);
+  }
+
   Widget buildButton() => ElevatedButton(
         onPressed: () {
           var mytodo = Todo(
               title: textController.text.toString(),
               description: textController2.text.toString(),
               isChecked: false,
-              creationDate: DateTime.now());
-          insertionFunction(mytodo);
-          Dismissible:
-          false;
+              creationDate: selecteddate);
+          widget.insertionFunction(mytodo);
         },
         child: const Text("Save"),
       );
