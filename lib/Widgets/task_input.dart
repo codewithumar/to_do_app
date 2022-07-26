@@ -5,7 +5,8 @@ import 'package:to_do_app/Models/todo_model.dart';
 
 class UserInput extends StatefulWidget {
   final Function insertionFunction;
-  UserInput({required this.insertionFunction, Key? key}) : super(key: key);
+  const UserInput({required this.insertionFunction, Key? key})
+      : super(key: key);
 
   @override
   State<UserInput> createState() => _UserInputState();
@@ -116,8 +117,6 @@ class _UserInputState extends State<UserInput> {
         selecteddate = pickeddate;
       });
     });
-    Builder:
-    (context);
   }
 
   getTiemfromuser(BuildContext context) {
@@ -133,17 +132,17 @@ class _UserInputState extends State<UserInput> {
         selectedTime = pickTime;
       });
     });
-    Builder:
-    (context);
   }
 
   Widget buildButton() => ElevatedButton(
         onPressed: () {
+          Navigator.pop(context);
           var mytodo = Todo(
-              title: textController.text.toString(),
-              description: textController2.text.toString(),
-              isChecked: false,
-              creationDate: selecteddate);
+            title: textController.text.toString(),
+            description: textController2.text.toString(),
+            isChecked: false,
+            creationDate: selecteddate,
+          );
           widget.insertionFunction(mytodo);
         },
         child: const Text("Save"),

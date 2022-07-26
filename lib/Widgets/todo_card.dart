@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Models/todo_model.dart';
 
+import '../Models/db_model.dart';
+
 // ignore: must_be_immutable
 class TodoCard extends StatefulWidget {
-  final int id;
-  final String title;
-  final String description;
+  Todo todo;
   bool isChecked;
-  final DateTime cerationDate;
+  DateTime cerationDate;
   final Function insertionFunction;
   final Function deleteFunction;
 
-  TextEditingController textEditingController = TextEditingController();
   TodoCard(
-      {required this.id,
-      required this.title,
-      required this.description,
+      {required this.todo,
       required this.cerationDate,
       required this.isChecked,
       required this.insertionFunction,
@@ -29,14 +26,26 @@ class TodoCard extends StatefulWidget {
 
 class _TodoCardState extends State<TodoCard> {
   DateTime selecteddate = DateTime.now();
+  var db = DatabaseConnect();
+  late TextEditingController textEditingController;
+  late TextEditingController textEditingController2;
+
+  @override
+  void initState() {
+    super.initState();
+    textEditingController = TextEditingController(text: widget.todo.title);
+    textEditingController2 = TextEditingController(
+      text: widget.todo.description,
+    );
+  }
+
+  Future<void> _updateItem(Todo todo) async {
+    await db.update(todo);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    var anotherTodo = Todo(
-        id: widget.id,
-        title: widget.title,
-        description: widget.description,
-        creationDate: widget.cerationDate,
-        isChecked: widget.isChecked);
     return GestureDetector(
       child: Card(
         child: Row(
@@ -50,16 +59,16 @@ class _TodoCardState extends State<TodoCard> {
                       widget.isChecked = value!;
                     });
 
-                    anotherTodo.isChecked = value!;
-                    widget.insertionFunction(anotherTodo);
+                    widget.todo.isChecked = value!;
+                    widget.insertionFunction(widget.todo);
                   }),
             ),
             Expanded(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                  Text(widget.id.toString()),
-                  Text(widget.title,
+                  //Text(widget.id.toString()),
+                  Text(widget.todo.title,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -67,7 +76,7 @@ class _TodoCardState extends State<TodoCard> {
                   const SizedBox(
                     width: 5,
                   ),
-                  Text(widget.description),
+                  Text(widget.todo.description),
                   Text(widget.cerationDate.toString(),
                       style: const TextStyle(
                         fontSize: 16,
@@ -91,7 +100,7 @@ class _TodoCardState extends State<TodoCard> {
                             TextButton(
                                 child: const Text('Delete'),
                                 onPressed: () {
-                                  widget.deleteFunction(anotherTodo);
+                                  widget.deleteFunction(widget.todo);
                                   setState(() {});
                                   Navigator.of(context).pop();
                                 }),
@@ -107,40 +116,55 @@ class _TodoCardState extends State<TodoCard> {
         ),
       ),
       onTap: () {
-        Todo(
-            id: widget.id,
-            title: widget.title,
-            description: widget.description,
-            isChecked: widget.isChecked,
-            creationDate: widget.cerationDate);
-
         opendialog();
       },
     );
   }
 
-  getdatefromuser(BuildContext context) {
-    showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime.now(),
-            lastDate: DateTime(3000))
-        .then((pickeddate) {
-      if (pickeddate == null) {
-        return null;
-      }
-      setState(() {
-        selecteddate = pickeddate;
-      });
-    });
-    Builder:
-    (context);
-  }
+  // getdatefromuser(BuildContext context) {
+  //   showDatePicker(
+  //           context: context,
+  //           initialDate: DateTime.now(),
+  //           firstDate: DateTime.now(),
+  //           lastDate: DateTime(3000))
+  //       .then((pickeddate) {
+  //     if (pickeddate == null) {
+  //       return null;
+  //     }
+  //     setState(() {
+  //       selecteddate = pickeddate;
+  //     });
+  //   });
+  //   Builder:
+  //   (context);
+  // }
 
   Future opendialog() => showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          title: Text(widget.title),
+        builder: (context) => SimpleDialog(
+          title: const Text("Update Todo"),
+          children: [
+            TextFormField(controller: textEditingController),
+            TextFormField(controller: textEditingController2),
+            buildButton(),
+
+            /// getdatefromuser(context),
+          ],
         ),
+      );
+  buildButton() => ElevatedButton(
+        onPressed: () async {
+          Navigator.pop(context);
+          var mytodo = Todo(
+            id: widget.todo.id,
+            title: textEditingController.text,
+            description: textEditingController2.text,
+            isChecked: widget.isChecked,
+            creationDate: widget.cerationDate,
+          );
+          widget.todo = mytodo;
+          await _updateItem(mytodo);
+        },
+        child: const Text("Save"),
       );
 }

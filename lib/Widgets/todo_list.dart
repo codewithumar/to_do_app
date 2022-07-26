@@ -28,20 +28,16 @@ class TodoList extends StatelessWidget {
                 )
               : ListView.builder(
                   itemCount: datalength,
-                  itemBuilder: (context, i) => GestureDetector(
-                    child: TodoCard(
-                        id: data[i].id,
-                        title: data[i].title,
-                        description: data[i].description,
-                        cerationDate: data[i].creationDate,
-                        isChecked: data[i].isChecked,
-                        insertionFunction: insertionFuntion,
-                        deleteFunction: deleteFunction),
-                    onTap: () {
-                      print(i);
-                    },
-                  ),
-                );
+                  itemBuilder: (context, i) {
+                    final todo = data[i];
+                    return TodoCard(
+                      todo: todo,
+                      cerationDate: todo.creationDate,
+                      isChecked: todo.isChecked,
+                      insertionFunction: insertionFuntion,
+                      deleteFunction: deleteFunction,
+                    );
+                  });
         },
       ),
     );
