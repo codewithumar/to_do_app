@@ -4,14 +4,15 @@ class Todo {
   final String description;
   DateTime creationDate;
   bool isChecked;
+  String status;
 
-  Todo({
-    this.id,
-    required this.title,
-    required this.description,
-    required this.isChecked,
-    required this.creationDate,
-  });
+  Todo(
+      {this.id,
+      required this.title,
+      required this.description,
+      required this.isChecked,
+      required this.creationDate,
+      required this.status});
 
   Map<String, dynamic> toMap() {
     return {
@@ -20,6 +21,7 @@ class Todo {
       'description': description,
       'isChecked': isChecked ? 1 : 0,
       'creationDate': creationDate.toString(),
+      'status': status,
     };
   }
 }

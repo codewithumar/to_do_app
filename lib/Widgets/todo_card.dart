@@ -30,13 +30,16 @@ class _TodoCardState extends State<TodoCard> {
   late TextEditingController textEditingController;
   late TextEditingController textEditingController2;
 
+  TimeOfDay? selectedTime;
+
   @override
   void initState() {
     super.initState();
-    textEditingController = TextEditingController(text: widget.todo.title);
+    textEditingController = TextEditingController(text: "");
     textEditingController2 = TextEditingController(
-      text: widget.todo.description,
+      text: "",
     );
+    widget.todo.status;
   }
 
   Future<void> _updateItem(Todo todo) async {
@@ -57,6 +60,11 @@ class _TodoCardState extends State<TodoCard> {
                   onChanged: (bool? value) {
                     setState(() {
                       widget.isChecked = value!;
+                      if (value == true) {
+                        widget.todo.status = "Completed";
+                      } else {
+                        widget.todo.status = "Pending";
+                      }
                     });
 
                     widget.todo.isChecked = value!;
@@ -83,6 +91,7 @@ class _TodoCardState extends State<TodoCard> {
                         fontWeight: FontWeight.bold,
                       ))
                 ])),
+            TextButton(onPressed: () {}, child: Text(widget.todo.status)),
             TextButton(
               child: const Text("Delete"),
               onPressed: () {
@@ -106,11 +115,7 @@ class _TodoCardState extends State<TodoCard> {
                                 }),
                           ],
                         ));
-
-                //  widget.deleteFunction(anotherTodo);
-                // setState(() {});
               },
-              //  icon: const Icon(Icons.close)),
             )
           ],
         ),
@@ -121,23 +126,36 @@ class _TodoCardState extends State<TodoCard> {
     );
   }
 
-  // getdatefromuser(BuildContext context) {
-  //   showDatePicker(
-  //           context: context,
-  //           initialDate: DateTime.now(),
-  //           firstDate: DateTime.now(),
-  //           lastDate: DateTime(3000))
-  //       .then((pickeddate) {
-  //     if (pickeddate == null) {
-  //       return null;
-  //     }
-  //     setState(() {
-  //       selecteddate = pickeddate;
-  //     });
-  //   });
-  //   Builder:
-  //   (context);
-  // }
+  getdatefromuser(BuildContext context) {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime.now(),
+            lastDate: DateTime(3000))
+        .then((pickeddate) {
+      if (pickeddate == null) {
+        return null;
+      }
+      setState(() {
+        selecteddate = pickeddate;
+      });
+    });
+  }
+
+  getTiemfromuser(BuildContext context) {
+    showTimePicker(
+            context: context,
+            initialTime:
+                TimeOfDay(hour: selecteddate.hour, minute: selecteddate.minute))
+        .then((pickTime) {
+      if (pickTime == null) {
+        return null;
+      }
+      setState(() {
+        selectedTime = pickTime;
+      });
+    });
+  }
 
   Future opendialog() => showDialog(
         context: context,
@@ -147,6 +165,16 @@ class _TodoCardState extends State<TodoCard> {
             TextFormField(controller: textEditingController),
             TextFormField(controller: textEditingController2),
             buildButton(),
+            TextButton(
+                onPressed: () {
+                  selecteddate = getdatefromuser(context);
+                },
+                child: const Text('Choose date')),
+            TextButton(
+                onPressed: () {
+                  selectedTime = getTiemfromuser(context);
+                },
+                child: const Text("Choose Time"))
 
             /// getdatefromuser(context),
           ],
@@ -156,14 +184,17 @@ class _TodoCardState extends State<TodoCard> {
         onPressed: () async {
           Navigator.pop(context);
           var mytodo = Todo(
+            status: widget.todo.status,
             id: widget.todo.id,
             title: textEditingController.text,
             description: textEditingController2.text,
             isChecked: widget.isChecked,
-            creationDate: widget.cerationDate,
+            creationDate: selecteddate,
           );
           widget.todo = mytodo;
+          widget.insertionFunction(widget.todo);
           await _updateItem(mytodo);
+          setState(() {});
         },
         child: const Text("Save"),
       );

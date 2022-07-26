@@ -22,7 +22,12 @@ class _UserInputState extends State<UserInput> {
   final textController2 = TextEditingController();
 
   DateTime selecteddate = DateTime.now();
-  TimeOfDay selectedTime = TimeOfDay.now();
+  TimeOfDay? selectedTime;
+  @override
+  void initState() {
+    super.initState();
+    selectedTime;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,43 +45,9 @@ class _UserInputState extends State<UserInput> {
               child: const Text('Choose date')),
           TextButton(
               onPressed: () {
-                getTiemfromuser(context);
+                selectedTime = getTiemfromuser(context);
               },
               child: const Text("Choose Time"))
-          // buildDate()
-
-          /*Expanded(
-              child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 2),
-            child: TextField(
-              controller: textController,
-              decoration: const InputDecoration(
-                hintText: 'Add New Note',
-              ),
-            ),
-          )),
-          GestureDetector(
-            onTap: () {
-              var mytodo = Todo(
-                  title: textController.text,
-                  description: textController.text,
-                  isChecked: false,
-                  creationDate: DateTime.now());
-              insertionFunction(mytodo);
-              Navigator.pop(context);
-            },
-            child: Container(
-              color: Colors.red,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-              child: const Text(
-                'Add',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          )*/
         ],
       ),
     );
@@ -138,6 +109,7 @@ class _UserInputState extends State<UserInput> {
         onPressed: () {
           Navigator.pop(context);
           var mytodo = Todo(
+            status: "Pending",
             title: textController.text.toString(),
             description: textController2.text.toString(),
             isChecked: false,

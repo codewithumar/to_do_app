@@ -22,7 +22,8 @@ class DatabaseConnect {
       title TEXT,
       description TEXT,
       creationDate TEXT,
-      isChecked INTEGER
+      isChecked INTEGER,
+      status TEXT
     )
 ''');
   }
@@ -58,6 +59,7 @@ class DatabaseConnect {
         description: items[i]['description'],
         creationDate: DateTime.parse(items[i]['creationDate']),
         isChecked: items[i]['isChecked'] == 1 ? true : false,
+        status: items[i]['status'],
       ),
     );
   }

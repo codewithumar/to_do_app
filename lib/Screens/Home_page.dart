@@ -6,8 +6,8 @@ import 'package:to_do_app/Widgets/todo_list.dart';
 import '../Models/todo_model.dart';
 
 class HomePage extends StatefulWidget {
-  final title = "";
-  final description = "";
+  // final title = "";
+  // final description = "";
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           showDialog(
               context: context,
-              barrierDismissible: false,
+              barrierDismissible: true,
               builder: (BuildContext context) {
                 return SimpleDialog(children: [
                   UserInput(
