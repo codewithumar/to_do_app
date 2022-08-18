@@ -1,5 +1,28 @@
 # To_do_app
 
+Flutter application for saving and generating the random password.
+
+# User Flow Diagram and Description
+
+![Todo drawio](https://user-images.githubusercontent.com/70685682/185343991-ee8651f3-03f9-456f-9a33-154e05c38277.png)
+
+Use the [draw.io](https://draw.io/) to make the user flow diagram and add the description.
+
+## Use Cases and description
+
+The use case should be defined like this:
+ 
+#### Password Generation - Title ####
+Application should generate the random password with defined range. - Description
+
+**Use case can be login, search, view etc.**
+
+## Video defining the use cases one by one
+
+[![Watch the video](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)](https://youtu.be/nTQUwghvy5Q)
+
+
+
 A new Flutter project to take record of daily To do tasks
 First when we lunch the app it will take us to the Hoem Screen looks like this.
 Where we have a list of todo task and edit delete and add todo option.
