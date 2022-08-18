@@ -1,14 +1,12 @@
 # To_do_app
 
-Flutter application for saving and generating the random password.
+Flutter application for saving Daily Tasks A Smple Todo App .
 
 # User Flow Diagram and Description
 
-![Todo drawio](https://user-images.githubusercontent.com/70685682/185343991-ee8651f3-03f9-456f-9a33-154e05c38277.png)
+![Todo drawio](https://user-images.githubusercontent.com/70685682/185345881-7bd9dcaf-0eb3-4195-9cbf-58c180077593.png)
 
-Use the [draw.io](https://draw.io/) to make the user flow diagram and add the description.
-
-## Use Cases and description
+# Use Cases and description
 
 The use case should be defined like this:
  
