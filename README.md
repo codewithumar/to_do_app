@@ -24,4 +24,4 @@ Application should Edit any task task . - On the home screen we can tap on any t
 
 
 
-[![Watch the video](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)]([https://youtu.be/nTQUwghvy5Q](https://youtu.be/4MzYzHTghfU))
+[![Watch the video](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)](https://youtu.be/4MzYzHTghfU)
