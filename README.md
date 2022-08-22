@@ -19,8 +19,8 @@ Application should cerate task . - On the home screen we can add new task in the
 #### Edit Task  ####
 Application should Edit any task task . - On the home screen we can tap on any task and it will show a popup to updated the Title ,description Time and date of task.
 
-#### Edit Task  ####
-Application should Edit any task task . - On the home screen we can tap on any task and it will show a popup to updated the Title ,description Time and date of task.
+#### Update Task  ####
+Application should update any existing task task . - On the home screen we can tap on any task and it will show a popup to updated the Title ,description Time and date of task.
 
 
 
