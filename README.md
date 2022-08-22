@@ -8,7 +8,7 @@ Flutter application for saving Daily Tasks A Smple Todo App .
 
 # Use Cases and description
 A new Flutter project to take record of daily To do tasks
-First when we lunch the app it will take us to the Hoem Screen looks like this.
+First when we lunch the app it will take us to the Hoem Screen.
 Where we have a list of todo task and edit delete and add todo option.
 
 ## Use cases
@@ -21,6 +21,9 @@ Application should Edit any task task . - On the home screen we can tap on any t
 
 #### Update Task  ####
 Application should update any existing task task . - On the home screen we can tap on any task and it will show a popup to updated the Title ,description Time and date of task.
+
+#### Delete Task  ####
+Application should Delete any existing task . - On the home screen we can tap on any task's Delete icon and it will show a confermation popup to delete the task.
 
 
 
